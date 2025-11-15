@@ -1,0 +1,25 @@
+create table info
+(Admission_no integer Primary key,
+ First_Name varchar(20),
+ Last_Name varchar(20),
+ Grade integer,
+ Section char(1),
+ Designation varchar(10) default "Student");
+
+create table cred
+(Username varchar(6) Primary key,
+ Password varchar(20) NOT NULL);
+
+create table events
+(Event_Name varchar(25),
+ Grades varchar(5),
+ Prelims_Date varchar(15),
+ Finals_Date varchar(15));
+
+create table registrations
+(First_Name varchar(20),
+ Last_Name varchar(20),
+ Grade integer,
+ Event_Name varchar(25));
+
+create table 
