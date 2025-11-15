@@ -61,6 +61,7 @@ def SIGNUP():
         house_var=tk.StringVar()
         e7=tk.Entry(wininfo, textvariable= house_var)
         e7.place(x=90, y=285)
+        
         def enter_info(capt):
             fn = e3.get()
             ln = e4.get()
@@ -103,7 +104,6 @@ def SIGNUP():
         tk.Label(wininfo, text="Captain/Vice Captain?", background="burlywood2").place(x=100, y=305)
         tk.Button(wininfo, text="Yes", command=lambda: enter_info("Yes"), bg="azure3").place(x=90, y=310)
         tk.Button(wininfo, text="No", command=lambda: enter_info("No"), bg="azure3").place(x=110, y=310)
-
     tk.Button(winSIGNUP, text="Confirm", command=Confirm).place(x=125, y=195)
     
 def admin():
@@ -143,6 +143,7 @@ def admin():
         e6=tk.Entry(winreg, textvariable=ename)
         e6.place(x=90, y=145)
         tk.Button(winreg, text="OK",command=lambda: [show(e6.get())],bg="azure3").place(x=100, y=225)  
+        
     def main_search():
         def search():
             ename=entry.get()
@@ -189,7 +190,6 @@ def admin():
         tk.Button(winsearch, text="Search", command=search, bg="azure3").place(x=160, y=120)
 
     def main_update():
-
         def select_pd():
             def get_pd():
                 global pdate
@@ -333,7 +333,6 @@ def admin():
         cur.close()
         obj.close()
         tree.pack()
-        
         hsb=ttk.Scrollbar(see, orient="horizontal") 
         hsb.configure(command=tree.xview)
         tree.configure(xscrollcommand=hsb.set)
@@ -341,7 +340,6 @@ def admin():
         tk.Button(see, text="Withdraw", command=delete, bg="azure3").place(x=210, y=350) 
 
     def add():
-        
         def show(n,g,p,f):
             obj=mc.connect(host="localhost", user="root", password="sql123", database="school")
             cur=obj.cursor()
@@ -399,12 +397,10 @@ def admin():
         tk.Button(winadd, text="Select Prelims date",command=pdate, bg="azure3").place(x=100, y=185)
         tk.Button(winadd, text="Select Finals date",command=fdate, bg="azure3").place(x=100, y=225) 
         tk.Button(winadd, text="OK",command=lambda: [show(name.get(), grades.get(), p_date, f_date)],bg="azure3").place(x=100, y=265)
-    
     winAdmin = tk.Tk()
     winAdmin.title("Events")
     winAdmin.geometry("1000x1000")
     winAdmin.configure(background="burlywood2")
-    
     tree=ttk.Treeview(winAdmin)
     tree['show']='headings'
     s=ttk.Style(winAdmin)
@@ -420,7 +416,6 @@ def admin():
     tree.heading("Grades", text="Grades")
     tree.heading("Prelims_Date", text="Prelims Date")
     tree.heading("Finals_Date", text="Finals Date")
-    
     obj=mc.connect(host="localhost", user="root", password="sql123", database="school")
     cur=obj.cursor()
     q1="select * from events;"
@@ -616,15 +611,12 @@ def checkCred():
     global username
     username=e1.get()
     pwd=e2.get()
-    
     try:
         obj=mc.connect(host="localhost",user="root",password="sql123",database="school")
         cur=obj.cursor()
-        
         q1="select password from cred where username = %s"
         cur.execute(q1, (username,))
-        data=cur.fetchone() 
-
+        data=cur.fetchone()
         if data:
             db_password = data[0]
             if db_password == pwd:
@@ -644,14 +636,12 @@ def checkCred():
                 messagebox.showinfo("Fail","Incorrect password")
         else:
             messagebox.showinfo("Fail","Username doesn't exist")
-
     except mc.Error as e:
         messagebox.showerror("Database Error", f"An error occurred: {e}")
     finally:
         if 'obj' in locals() and obj.is_connected():
             cur.close()
             obj.close()
-
 win=tk.Tk()
 win.geometry('500x500')
 try:
@@ -660,20 +650,16 @@ try:
     label1.place(x=125, y=135) 
 except tk.TclError:
     print("Warning: logo.png not found. Skipping background image.")
-
 L1=tk.Label(win, text="NPS HSR Interhouse Events",fg="blue4",font=("Helvetica",20)).place(x=75, y=75)
 win.title("NPS HSR")
 username_var=tk.StringVar() 
 l1=tk.Label(win,text="Enter username (admission no.)",fg="blue4",bg="white",font=("Helvetica",16)).place(x=140,y=105)
 e1=tk.Entry(win, textvariable=username_var) 
 e1.place(x=170,y=140,width=150,height=30)
-
 pwd_var=tk.StringVar() 
 l2=tk.Label(win,text="Enter password",fg="blue4",bg="white",font=("Helvetica",16)).place(x=160,y=180)
 e2=tk.Entry(win,show="*", textvariable=pwd_var) 
 e2.place(x=170,y=220,width=150,height=30)
-
 b=tk.Button(win, text="Log In", command=checkCred, bg="azure2").place(x=220,y=260)
 b2=tk.Button(win, text="Sign Up", command=SIGNUP, bg="azure2").place(x=220.5,y=300)
-
 win.mainloop()
