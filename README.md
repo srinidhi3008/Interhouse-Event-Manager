@@ -1,5 +1,5 @@
 # Interhouse-Event-Manager
-This is a desktop application built with Python's `tkinter` GUI toolkit and a MySQL database. It serves as a simple management system for school inter-house events, providing two distinct user roles: one for regular students and one for admins (House Captains/Vice-Captains).
+This is a desktop application built with Python's tkinter GUI toolkit and a MySQL database. It serves as a simple management system for school inter-house events, providing two distinct user roles: one for regular students and one for admins (House Captains/Vice-Captains).
 ## Features
 ### General
 * **Login System:** Secure login that directs users to the appropriate dashboard.
